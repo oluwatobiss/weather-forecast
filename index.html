@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Today's Weather</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="./index.css">
+        <script src="https://kit.fontawesome.com/465e3a1049.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <main>
+            <section id="search-section">
+                <form id="search-box">
+                    <input type="text" placeholder="Search city...">
+                    <button type="button"><i class="fas fa-search"></i></button>
+                </form>
+                <label id="switch">
+                    <input type="checkbox" id="checkbox">
+                    <span id="slider"></span>
+                    <span id="fah-cel-text" data-fah="℉" data-cel="℃"></span>
+                </label>
+            </section>
+            <section id="display-section">
+                <p id="weather-description"><span><i class="fas fa-sun"></i></span> Sunny</p>
+                <h1 id="city">Lagos, Nigeria</h1>
+                <div id="weather-analysis">
+                    <span id="temp">33℃</span>
+                    <span id="other-data">
+                        <p>FEELS LIKE: <span id="feels-like">35℃</span></p>
+                        <p>HUMIDITY: <span id="humidity">58%</span></p>
+                        <p>WIND: <span id="wind">4.59k/m</span></p>
+                        <p>TIME: <span id="time">10:58:49 AM</span></p>
+                    </span>
+                </div>
+            </section>
+        </main>
+        <footer><a href="https://www.codesweetly.com/" target="blank">Created by Oluwatobi Sofela ▶</a></footer>
+    </body>
+</html>
