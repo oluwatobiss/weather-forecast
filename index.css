@@ -5,9 +5,11 @@ html {
 body {
     margin: 0;
     height: inherit;
-    background-color: #3d3d3d;
-	background: url("https://cdn.pixabay.com/photo/2020/04/27/17/58/petals-5100957_1280.jpg") no-repeat center;
+	background-image: linear-gradient(black, black), url("https://cdn.pixabay.com/photo/2016/11/18/01/45/moon-1833172_1280.jpg");
 	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-blend-mode: saturation;
     display: grid;
     grid-template-rows: 95% 5%;
     align-items: center;
@@ -26,6 +28,14 @@ main {
     display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+
+#searchErrorText {
+	width: 400px;
+	height: 15px;
+	font-weight: 700;
+	text-shadow: .4px .4px black;
+	color: red;
 }
 
 #search-box {
@@ -128,13 +138,23 @@ main {
 }
 
 #weather-description {
+	margin-bottom: 0;
 	line-height: 0;
 	font-size: 1.4rem;
 	text-shadow: .5px .5px black;
 }
 
+#description {
+	display: inline-block;
+}
+
+#description::first-letter {
+	text-transform: uppercase;
+}
+
 #city {
-	line-height: 0.2;
+	margin-top: 0;
+	line-height: 1.1;
 	font-size: 2.15rem;
 	font-weight: 900;
 	text-transform: uppercase;
@@ -175,4 +195,8 @@ footer {
 a {
 	text-decoration: none;
 	color: peru;
+}
+
+a:hover {
+	color: red;
 }

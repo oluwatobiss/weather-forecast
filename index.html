@@ -12,10 +12,11 @@
     <body>
         <main>
             <section id="search-section">
-                <form id="search-box">
-                    <input type="text" placeholder="Search city...">
-                    <button type="button"><i class="fas fa-search"></i></button>
-                </form>
+                <p id="searchErrorText"></p>
+                <div id="search-box">
+                    <input type="text" placeholder="Search city..." id="search-bar">
+                    <button type="button" id="search-bar-btn"><i class="fas fa-search"></i></button>
+                </div>
                 <label id="switch">
                     <input type="checkbox" id="checkbox">
                     <span id="slider"></span>
@@ -23,7 +24,9 @@
                 </label>
             </section>
             <section id="display-section">
-                <p id="weather-description"><span><i class="fas fa-sun"></i></span> Sunny</p>
+                <p id="weather-description">
+                    <i class="fas fa-sun weather-icon"></i> <span id="description">Sunny</span>
+                </p>
                 <h1 id="city">Lagos, Nigeria</h1>
                 <div id="weather-analysis">
                     <span id="temp">33℃</span>
@@ -37,5 +40,7 @@
             </section>
         </main>
         <footer><a href="https://www.codesweetly.com/" target="blank">Created by Oluwatobi Sofela ▶</a></footer>
+
+        <script src="./index.js"></script>
     </body>
 </html>
