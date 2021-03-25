@@ -1,6 +1,4 @@
-html {
-    height: 100%;
-}
+html { height: 100%; }
 
 body {
     margin: 0;
@@ -35,7 +33,7 @@ body {
 
 main {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: repeat(2, 50%);
     height: inherit;
     align-items: center;
 }
@@ -46,7 +44,7 @@ main {
 	align-items: center;
 }
 
-#searchErrorText {
+#search-error-text {
 	width: 400px;
 	height: 15px;
 	font-weight: 700;
@@ -131,9 +129,7 @@ main {
 	transform: translateX(26px);
 }
 
-#checkbox:checked + #slider {
-    background-color: brown;
-}
+#checkbox:checked + #slider { background-color: brown; }
 
 #fah-cel-text::before {
 	position: absolute;
@@ -160,13 +156,9 @@ main {
 	text-shadow: .5px .5px black;
 }
 
-#description {
-	display: inline-block;
-}
+#description { display: inline-block; }
 
-#description::first-letter {
-	text-transform: uppercase;
-}
+#description::first-letter { text-transform: uppercase; }
 
 #city {
 	margin-top: 0;
@@ -176,9 +168,7 @@ main {
 	text-transform: uppercase;
 }
 
-#city::first-letter {
-	font-size: 5rem;
-}
+#city::first-letter { font-size: 5rem; }
 
 #weather-analysis {
 	display: flex;
@@ -211,6 +201,4 @@ a {
 	color: peru;
 }
 
-a:hover {
-	color: red;
-}
+a:hover { color: red; }
