@@ -5,7 +5,7 @@ html {
 body {
     margin: 0;
     height: inherit;
-	background-image: linear-gradient(black, black), url("https://cdn.pixabay.com/photo/2016/11/18/01/45/moon-1833172_1280.jpg");
+	background-image: linear-gradient(black, black), url("https://cdn.pixabay.com/photo/2021/01/05/06/40/boat-5889919_1280.png");
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -15,6 +15,22 @@ body {
     align-items: center;
 	font-family: 'Noto Sans JP', sans-serif;
 	color: peru;
+}
+
+#loading-spinner {
+	display: none;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	z-index: 1;
+	margin: -76px 0 0 -76px;
+	font-size: 1.9rem;
+	animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
 }
 
 main {
@@ -174,8 +190,6 @@ main {
 	margin-right: 20px;
 	width: 250px;
 	line-height: 150px;
-	background: url("https://flagcdn.com/h240/ng.png") no-repeat center;
-	background-size: contain;
 	text-align: center;
 	font-size: 5.5rem;
 	color: #3d3d3d;

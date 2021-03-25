@@ -1,3 +1,4 @@
+const loadingSpinnerDiv = document.getElementById("loading-spinner");
 const searchErrorText = document.getElementById("searchErrorText");
 const searchBar = document.getElementById("search-bar");
 const searchBarBtn = document.getElementById("search-bar-btn");
@@ -13,34 +14,33 @@ const timeSpan = document.getElementById("time");
 let unitsOfMeasurement = null;
 let tempUnitSymbol = null;
 let windUnitSymbol = null;
+let temp = null;
+let tempFeelsLike = null;
 
 window.addEventListener("load", chooseRandomCity);
 document.addEventListener("keydown", getPressedKey);
 searchBarBtn.addEventListener("click", getSearchedCity);
+fahCelCheckbox.addEventListener("click", toggleFahCel);
 
 function chooseRandomCity() {
     const cities = [
-        "Antalya", "Bangkok", "Delhi", "Dubai", "Hawaii", "Hong Kong", "Istanbul", "Jerusalem", "Kuala Lumpur", 
-        "London", "Macau", "Mecca", "Montreal", "New York City", "Lagos", "Paris", "Rome", "Singapore", "Tokyo", "Yakutsk"
-    ]
+        "Antalya, TR", "Bangkok, TH", "Delhi, IN", "Dubai, AE", "Hawaii, US", 
+        "Hong Kong, HK", "Istanbul, TR", "Jerusalem, IL", "Kuala Lumpur, MY", 
+        "London, UK", "Macao, MO", "Mecca, SA", "Montreal, CA", "New York City, US",
+        "Lagos, NG", "Paris, FR", "Rome, IT", "Singapore, SG", "Tokyo, JP", "Yakutsk, RU"
+    ];
 
     const selectedCity = cities[Math.floor(Math.random() * cities.length)];
     getSearchedCity(selectedCity);
 }
 
-function getPressedKey(keyPressed) {
-    if (keyPressed.key === "Enter") {
-        getSearchedCity();
-    } else {
-        searchErrorText.innerText = "";
-    }
-}
-
 function getSearchedCity(selectedCity) {
-    let searchedCity = searchBar.value;
     const englishRegionName = new Intl.DisplayNames(["en"], {type: "region"});
+    let searchedCity = searchBar.value;
+    
+    loadingSpinnerDiv.style.display = "block";
 
-    if (selectedCity) {
+    if (typeof selectedCity === "string") {
         searchedCity = selectedCity;
     }
 
@@ -67,13 +67,17 @@ function getSearchedCity(selectedCity) {
     })
     .then(function(res) {
         const countryCode = res.sys.country;
-        const cityAndCountry = `${res.name}, ${englishRegionName.of(countryCode)}`;
+        const countryName = englishRegionName.of(countryCode);
+        const cityAndCountry = `${res.name}, ${countryName}`;
         const weatherMain = res.weather[0].main;
         const weatherDesc = res.weather[0].description;
-        const temp = res.main.temp;
-        const tempFeelsLike = res.main.feels_like;
         const humidity = res.main.humidity;
         const windSpeed = res.wind.speed;
+
+        loadingSpinnerDiv.style.display = "none";
+        temp = res.main.temp;
+        tempFeelsLike = res.main.feels_like;
+        timeSpan.innerText = `Every moment in ${countryName} is lovely!`;
 
         changeWeatherImageAndIcon(weatherMain);
         showWeatherData(weatherDesc, cityAndCountry, temp, countryCode, tempFeelsLike, humidity, windSpeed);
@@ -88,7 +92,6 @@ function changeWeatherImageAndIcon(weatherMainDesc) {
     const bodyEle = document.querySelector("body");
     const descriptionIcon = document.querySelector(".weather-icon");
     const iconEle = document.createElement("i");
-    console.log("weatherMainDesc: " + weatherMainDesc);
 
     if (weatherMainDesc === "Thunderstorm") {
         bodyEle.style.backgroundImage =  'linear-gradient(black, black), url("https://cdn.pixabay.com/photo/2019/11/01/08/44/flashes-4593614_1280.jpg")';
@@ -128,11 +131,11 @@ function changeWeatherImageAndIcon(weatherMainDesc) {
 function showWeatherData(weatherDesc, cityAndCountry, temp, countryCode, tempFeelsLike, humidity, windSpeed) {
     descriptionSpan.innerText = weatherDesc;
     cityEle.innerText = cityAndCountry;
-    tempSpan.innerText = `${Math.round(temp)}${tempUnitSymbol}`;
+    tempSpan.innerText = `${Math.floor(temp)}${tempUnitSymbol}`;
     tempSpan.style.background = `url("https://flagcdn.com/h240/${countryCode.toLowerCase()}.png") no-repeat center`;
     tempSpan.style.backgroundSize = "contain";
-    feelsLikeSpan.innerText = `${Math.round(tempFeelsLike)}${tempUnitSymbol}`;
-    humiditySpan.innerText = `${Math.round(humidity)}%`;
+    feelsLikeSpan.innerText = `${Math.floor(tempFeelsLike)}${tempUnitSymbol}`;
+    humiditySpan.innerText = `${Math.floor(humidity)}%`;
     windSpan.innerText = `${windSpeed}${windUnitSymbol}`;
 }
 
@@ -153,4 +156,35 @@ function getTimeAndDate(cityAndCountry) {
     .catch(function(err) {
         console.error(err);
     });
+}
+
+function getPressedKey(keyPressed) {
+    if (keyPressed.key === "Enter") {
+        getSearchedCity();
+    } else {
+        searchErrorText.innerText = "";
+        loadingSpinnerDiv.style.display = "none";
+    }
+}
+
+function toggleFahCel() {
+    if (fahCelCheckbox.checked) {
+        const tempCel = (temp - 32) * (5/9);
+        const tempFeelsLikeCel = (tempFeelsLike - 32) * (5/9);
+
+        temp = tempCel;
+        tempSpan.innerText = `${Math.floor(tempCel)}℃`;;
+
+        tempFeelsLike = tempFeelsLikeCel;
+        feelsLikeSpan.innerText = `${Math.floor(tempFeelsLikeCel)}℃`;
+    } else {
+        const tempFah = (temp * (9/5)) + 32;
+        const tempFeelsLikeFah = (tempFeelsLike * (9/5)) + 32;
+
+        temp = tempFah;
+        tempSpan.innerText = `${Math.floor(tempFah)}℉`;
+
+        tempFeelsLike = tempFeelsLikeFah;
+        feelsLikeSpan.innerText = `${Math.floor(tempFeelsLikeFah)}℉`;
+    }
 }
