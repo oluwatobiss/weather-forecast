@@ -63,7 +63,7 @@
         async function getWeatherData() {
             try {
                 const englishRegionName = new Intl.DisplayNames(["en"], {type: "region"});
-                const weatherData = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${searchedCity}&units=${unitsOfMeasurement}&APPID=0f07f6f38ba2f139046630b2150bcd52`);
+                const weatherData = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${searchedCity}&units=${unitsOfMeasurement}&APPID=0f07f6f38ba2f139046630b2150bcd52`);
                 const jsonWeatherData = await weatherData.json();
                 const countryCode = jsonWeatherData.sys.country;
                 const countryName = englishRegionName.of(countryCode);
