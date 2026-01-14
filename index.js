@@ -82,7 +82,7 @@
           type: "region",
         });
         const weatherData = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${searchedCity}&units=${unitsOfMeasurement}&APPID=0f07f6f38ba2f139046630b2150bcd52`
+          `https://api.openweathermap.org/data/2.5/weather?q=${searchedCity}&units=${unitsOfMeasurement}&APPID=${ENV.API_KEY}`
         );
         const jsonWeatherData = await weatherData.json();
         const countryCode = jsonWeatherData.sys.country;
