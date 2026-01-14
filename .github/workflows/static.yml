@@ -48,6 +48,10 @@ jobs:
           VALIDATE_JAVASCRIPT_ES: true
           VALIDATE_CSS: true
           VALIDATE_HTML: true
+      - name: Inject Environment Variables
+        # This command creates a JS file with the app's API key from GitHub Secrets
+        run: |
+          echo "const ENV = { API_KEY: '${{ secrets.API_KEY }}' };" > env.js
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
